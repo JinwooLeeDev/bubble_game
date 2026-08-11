@@ -8,6 +8,7 @@ public class BubbleFrame extends JFrame {
 
     private JLabel backgroundMap = new JLabel();
     private Player player;
+    private boolean isPressed = false;
 
     public BubbleFrame() {
         initData();
@@ -42,15 +43,23 @@ public class BubbleFrame extends JFrame {
                 System.out.println("keyCode : " + e.getKeyCode());
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
+                        if (isPressed) return;
+                        isPressed = true;
                         player.left();
                         break;
                     case KeyEvent.VK_RIGHT:
+                        if (isPressed) return;
+                        isPressed = true;
                         player.right();
                         break;
                     case KeyEvent.VK_UP:
+                        if (isPressed) return;
+                        isPressed = true;
                         player.up();
                         break;
                     case KeyEvent.VK_DOWN:
+                        if (isPressed) return;
+                        isPressed = true;
                         player.down();
                         break;
                 }
@@ -62,12 +71,14 @@ public class BubbleFrame extends JFrame {
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
                         player.setLeft(false);
+                        isPressed = false;
                         break;
                     case KeyEvent.VK_RIGHT:
                         player.setRight(false);
+                        isPressed = false;
                         break;
                     case KeyEvent.VK_UP:
-
+                        isPressed = false;
                         break;
                     case KeyEvent.VK_DOWN:
 

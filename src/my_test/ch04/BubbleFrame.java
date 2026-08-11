@@ -1,4 +1,4 @@
-package _test02;
+package my_test.ch04;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -13,6 +13,10 @@ public class BubbleFrame extends JFrame {
         initData();
         setInitLayout();
         addEventListener();
+
+        // 플레이어의 위치에 따라 픽셀 감지하는 백그라운드 서비스 객체 생성.
+        new Thread(new BackgroundPlayerService(player)).start();
+        new BackgroundPlayerService(player);
     }
 
     private void initData() {
@@ -39,16 +43,15 @@ public class BubbleFrame extends JFrame {
 
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println("keyCode : " + e.getKeyCode());
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
                         // 이미 왼쪽으로 이동중이면 무시 (스레드 중복 생성 방지)
-                        if (!player.isLeft()) {
+                        if (!player.isLeft() && !player.isLeftWallCrash()) {
                             player.left();
                         }
                         break;
                     case KeyEvent.VK_RIGHT:
-                        if (!player.isRight()) {
+                        if (!player.isRight() && !player.isRightWallCrash()) {
                             player.right();
                         }
                         break;
@@ -61,12 +64,14 @@ public class BubbleFrame extends JFrame {
                     case KeyEvent.VK_DOWN:
                         player.down();
                         break;
+                    case KeyEvent.VK_SPACE:
+                        player.fireBubble(BubbleFrame.this);
+                        break;
                 }
             }
 
             @Override
             public void keyReleased(KeyEvent e) {
-                System.out.println("KeyReleased : " + e.getKeyCode());
                 switch (e.getKeyCode()) {
                     case KeyEvent.VK_LEFT:
                         player.setLeft(false);
