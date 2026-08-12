@@ -1,4 +1,4 @@
-package my_test.ch04;
+package _test05;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -34,11 +34,11 @@ public class BackgroundPlayerService implements Runnable {
         while (true) {
             // x = 55;
             // y = 535;
-            Color leftColor = new Color(image.getRGB(player.getX() + 5, player.getY() + 25));
-            Color rightColor = new Color(image.getRGB(player.getX() + 50 + 10, player.getY() + 25));
+            Color leftColor = new Color(image.getRGB(player.getX()+5, player.getY() + 25));
+            Color rightColor = new Color(image.getRGB(player.getX() + 50 + 10, player.getY()+ 25));
 
-//             System.out.println("left Color : " + leftColor);
-//             System.out.println("right Color : " + rightColor);
+            // System.out.println("left Color : " + leftColor);
+            // System.out.println("right Color : " + rightColor);
 
             if (isRed(leftColor)) {
                 // 현재 플레이어 왼쪽 벽에 충돌된 상태
@@ -57,6 +57,7 @@ public class BackgroundPlayerService implements Runnable {
             // 왼쪽 벽 감지 판단 - 빨간색 이라면
             // 플레이어가 왼쪽 충돌
             // 오른쪽 벽 감지 판단 - 빨간색 일라면
+
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
