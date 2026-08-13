@@ -1,4 +1,4 @@
-package _test05;
+package my_test.ch05;
 
 import lombok.Getter;
 
@@ -31,7 +31,7 @@ public class Bubble extends JLabel implements Moveable {
         // if 문을 사용해서 left(), right() 메서드를 분기하면 될 수 있을거 같은데 ?!
         if (player.getPlayerWay() == PlayerWay.LEFT) {
             new Thread(() -> {left();}).start();
-        } else if (player.getPlayerWay()==PlayerWay.RIGHT) {
+        } else if (player.getPlayerWay()== PlayerWay.RIGHT) {
             new Thread(() -> {right();}).start();
         }
     }
@@ -52,7 +52,7 @@ public class Bubble extends JLabel implements Moveable {
     public void left() {
         leftMoving = true;
         for(int i = 0; i < HORIZONTAL_DISTANCE; i++) {
-            x-=5;
+            x--;
             setLocation(x, y);
             try {
                 Thread.sleep(BUBBLE_SPEED_MS);
@@ -68,7 +68,7 @@ public class Bubble extends JLabel implements Moveable {
     public void right() {
         rightMoving = true;
         for(int i = 0; i < HORIZONTAL_DISTANCE; i++) {
-            x+=5;
+            x++;
             setLocation(x, y);
             try {
                 Thread.sleep(BUBBLE_SPEED_MS);
@@ -84,7 +84,7 @@ public class Bubble extends JLabel implements Moveable {
     public void up() {
         upMoving = true;
         while (y > SCREEN_TOP) {
-            y-=5;
+            y--;
             setLocation(x,y);
             try {
                 Thread.sleep(BUBBLE_SPEED);
